@@ -1,0 +1,9 @@
+# Ignore node_modules in all subfolders
+node_modules/
+
+# Ignore ALL secret environment files
+.env
+**/.env
+
+# Ignore zipped deployment files
+*.zip
