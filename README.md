@@ -1,6 +1,4 @@
-Here is a professional, eye-catching `README.md` template custom-built for your **CloudLens Studio** project. It highlights your architecture, tech stack, and the fact that you successfully integrated complex AWS services. 
 
-Just create a file named `README.md` in the root of your project (same level as your `frontend` and `backend` folders), paste this in, and update the bracketed placeholder links (like `[YOUR_LIVE_URL_HERE]`) with your actual URLs!
 
 ***
 
