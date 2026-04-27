@@ -29,7 +29,7 @@ function App() {
       if (pageNum > 1) setIsLoadingMore(true);
       
       // Pass the userId to the backend
-      const response = await axios.get(`http://localhost:5000/api/images?page=${pageNum}&limit=8&userId=${user.id}`);
+      const response = await axios.get(`https://image-app-backend-zddd.onrender.com/api/images?page=${pageNum}&limit=8&userId=${user.id}`);
       
       if (pageNum === 1) {
         setGalleryImages(response.data.images);
@@ -75,7 +75,7 @@ function App() {
       const safeFileName = file.name.replace(/[^a-zA-Z0-9.]/g, "_");
       const s3FileName = `${filter}___${safeFileName}`;
 
-      const { data } = await axios.post('http://localhost:5000/api/upload-url', {
+      const { data } = await axios.post('https://image-app-backend-zddd.onrender.com/api/upload-url', {
         fileName: s3FileName,
         fileType: file.type,
         edits: {
@@ -90,7 +90,7 @@ function App() {
       });
       
       // Pass the user ID when saving metadata
-      await axios.post('http://localhost:5000/api/images/metadata', {
+      await axios.post('https://image-app-backend-zddd.onrender.com/api/images/metadata', {
         fileName: `processed-${safeFileName}`, 
         filterUsed: filter,
         userId: user.id
@@ -115,7 +115,7 @@ function App() {
   const handleDelete = async (fileName) => {
     setGalleryImages(prev => prev.filter(img => img.key !== fileName));
     try {
-      await axios.delete(`http://localhost:5000/api/images/${encodeURIComponent(fileName)}`);
+      await axios.delete(`https://image-app-backend-zddd.onrender.com/api/images/${encodeURIComponent(fileName)}`);
       toast.success('Image deleted successfully');
     } catch (error) {
       console.error("Error deleting image:", error);
@@ -129,7 +129,7 @@ function App() {
       const toastId = toast.loading('Getting download link...');
       
       // 1. Ask our backend for the special forced-download S3 URL
-      const response = await axios.get(`http://localhost:5000/api/download-url?fileName=${encodeURIComponent(fileName)}`);
+      const response = await axios.get(`https://image-app-backend-zddd.onrender.com/api/download-url?fileName=${encodeURIComponent(fileName)}`);
       
       // 2. Create a temporary invisible link and click it
       const link = document.createElement('a');
@@ -152,7 +152,7 @@ function App() {
     if (!confirmDelete) return;
 
     setIsCleaning(true);
-    const cleanDbPromise = axios.delete('http://localhost:5000/api/clean-raw');
+    const cleanDbPromise = axios.delete('https://image-app-backend-zddd.onrender.com/api/clean-raw');
 
     toast.promise(cleanDbPromise, {
       loading: 'Emptying raw bucket...',
